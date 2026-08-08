@@ -1,0 +1,44 @@
+# Build outputs
+**/bin/
+**/obj/
+**/nupkg/
+**/TestResults/
+**/*.user
+**/*.suo
+**/*.cache
+**/*.log
+**/*.pdb
+**/*.snupkg
+**/*.zip
+
+# Visual Studio / UiPath
+.vs/
+*.csproj.user
+*.sln.docstates
+*.xaml.cs.tmp
+*.xaml.g.cs
+*.designer.cs
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# NuGet
+packages/
+*.nupkg
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Misc
+*.orig
+*.rej
+*.tmp

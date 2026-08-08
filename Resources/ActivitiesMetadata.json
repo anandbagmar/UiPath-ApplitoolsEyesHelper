@@ -1,0 +1,33 @@
+{
+  "resourceManagerName": "ApplitoolsEyesHelper.Resources.Resources",
+  "activities": [
+    {
+      "fullName": "ApplitoolsEyesHelper.Activities.EyesStartSessionActivity",
+      "shortName": "EyesStartSessionActivity",
+      "displayNameKey": "EyesStartDisplayName",
+      "descriptionKey": "EyesStartDescription",
+      "categoryKey": "EyesCategory"
+    },
+    {
+      "fullName": "ApplitoolsEyesHelper.Activities.EyesCheckActivity",
+      "shortName": "EyesCheckActivity",
+      "displayNameKey": "EyesCheckDisplayName",
+      "descriptionKey": "EyesCheckDescription",
+      "categoryKey": "EyesCategory"
+    },
+    {
+      "fullName": "ApplitoolsEyesHelper.Activities.EyesCloseActivity",
+      "shortName": "EyesCloseActivity",
+      "displayNameKey": "EyesCloseDisplayName",
+      "descriptionKey": "EyesCloseDescription",
+      "categoryKey": "EyesCategory"
+    },
+    {
+      "fullName": "ApplitoolsEyesHelper.Activities.EyesAbortActivity",
+      "shortName": "EyesAbortActivity",
+      "displayNameKey": "EyesAbortDisplayName",
+      "descriptionKey": "EyesAbortDescription",
+      "categoryKey": "EyesCategory"
+    }
+  ]
+}
