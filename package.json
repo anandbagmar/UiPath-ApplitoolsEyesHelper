@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "@appium/doctor": "2.1.15",
+    "@appium/relaxed-caps-plugin": "2.2.4",
+    "appium": "3.5.2",
+    "appium-device-farm": "11.3.2",
+    "appium-uiautomator2-driver": "8.1.0",
+    "appium-xcuitest-driver": "11.17.6",
+    "go-ios": "1.2.0"
+  },
+  "name": "UiPath-ApplitoolsEyesHelper",
+  "description": "Helper library to integrate Applitools Eyes with UiPath",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "appium",
+    "appium3.0",
+    "appium-doctor",
+    "teswiz",
+    "appium-device-farm"
+  ],
+  "author": "Anand Bagmar",
+  "license": "ISC"
+}
