@@ -132,3 +132,4 @@ Sequence
 ## One Rule To Remember
 
 Pass the same `Session Id` into every Eyes activity, and keep the `Appium Url` consistent with the mobile connection. Do not create a second Appium session for Eyes.
+

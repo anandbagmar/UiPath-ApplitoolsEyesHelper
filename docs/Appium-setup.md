@@ -2,7 +2,7 @@
 
 Install and start Appium server where the device/emulator is connected.
 
-Ex: 
+Ex:
 
 ```terminal
 npm i
