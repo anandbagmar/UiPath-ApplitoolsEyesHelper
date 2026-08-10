@@ -24,7 +24,7 @@ On the Mac:
 
 Important files in this repo:
 
-- `ApplitoolsEyesHelper.csproj`: builds the custom activity package.
+- `UiPath-ApplitoolsEyesHelper.csproj`: builds the custom activity package.
 - `README.md`: short overview and links to the docs.
 - `docs/SAMPLE_UIPATH_WORKFLOW.md`: example UiPath activity placement.
 - `docs/Appium-setup.md`: Appium server/tunnel notes for your Mac.
@@ -36,19 +36,19 @@ Important files in this repo:
 1. Open VS Code on the Windows VM.
 2. Choose `File` -> `Open Folder`.
 3. Open:
-   - `C:\UiPathActivity-ApplitoolsEyesHelper`
-4. Confirm you can see `ApplitoolsEyesHelper.csproj`.
+   - `C:\UiPath\UiPath-ApplitoolsEyesHelper`
+4. Confirm you can see `UiPath-ApplitoolsEyesHelper.csproj`.
 
 ## Step 2. Build the package
 
 1. Open the integrated terminal in VS Code.
 2. Make sure you are in the project root:
    ```bat
-   cd /d C:\UiPathActivity-ApplitoolsEyesHelper
+   cd /d C:\UiPath\UiPath-ApplitoolsEyesHelper
    ```
 3. Build the project:
    ```bat
-   dotnet build ApplitoolsEyesHelper.csproj -c Release
+   dotnet build UiPath-ApplitoolsEyesHelper.csproj -c Release
    ```
 
 If you hit restore issues, confirm:
@@ -60,9 +60,9 @@ If you hit restore issues, confirm:
 ## Step 3. Find the NuGet package
 
 1. After a successful build, open:
-   - `C:\UiPathActivity-ApplitoolsEyesHelper\nupkg`
+   - `C:\UiPath\UiPath-ApplitoolsEyesHelper\nupkg`
 2. You should see a `.nupkg` file, for example:
-   - `ApplitoolsEyesHelper.1.0.2.nupkg`
+   - `UiPath-ApplitoolsEyesHelper.1.0.2.nupkg`
 
 ## Step 4. Add the folder as a local package source in UiPath Studio
 
@@ -73,10 +73,10 @@ If you hit restore issues, confirm:
 5. Under `Package sources` or `User defined package sources`, click `Add feed`.
 6. Set:
    - `Name`: `UiPath-ApplitoolsEyesHelper Local`
-   - `Source`: `C:\UiPathActivity-ApplitoolsEyesHelper\nupkg`
+   - `Source`: `C:\UiPath\UiPath-ApplitoolsEyesHelper\nupkg`
 7. Save the settings.
 8. Go back to `All Packages`.
-9. Search for `ApplitoolsEyesHelper`.
+9. Search for `UiPath-ApplitoolsEyesHelper`.
 10. Install the newest version shown there.
 
 ## Step 5. Add the activities to your workflow
@@ -160,7 +160,7 @@ Because the emulator and Appium server are on your Mac:
 - Build succeeds.
 - `.nupkg` exists in the `nupkg` folder.
 - UiPath Studio can see the local feed.
-- `ApplitoolsEyesHelper` is installed.
+- `UiPath-ApplitoolsEyesHelper` is installed.
 - `sessionId` variable exists and is in scope.
 - `Eyes Start Session` uses `AppiumUrl` and `SessionId`.
 - `Eyes Check` uses the same `SessionId`.
@@ -175,4 +175,3 @@ If UiPath Studio shows a package compatibility error or the test fails at runtim
 3. Verify the `sessionId` variable is in scope.
 4. Verify `Eyes Start Session` is using the same Appium URL as the working mobile test.
 5. Reinstall the latest package version from the local feed.
-

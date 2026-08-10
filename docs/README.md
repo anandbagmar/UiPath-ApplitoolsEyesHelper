@@ -1,4 +1,4 @@
-# UiPath Applitools Eyes activities
+# UiPath-ApplitoolsEyesHelper
 
 This repo packages a small UiPath activity set for attaching Applitools Eyes to an Appium session that UiPath already created.
 
@@ -38,4 +38,3 @@ This repo packages a small UiPath activity set for attaching Applitools Eyes to 
 - This keeps the connection lifecycle in UiPath and keeps Eyes focused on visual checkpoints.
 - The implementation is a straightforward WF-style activity set, which is easiest to consume from UiPath Studio Desktop.
 - The same Session Id must be passed to each Eyes activity so the package can attach to the same live Appium session.
-

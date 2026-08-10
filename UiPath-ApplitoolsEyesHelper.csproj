@@ -6,9 +6,9 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <UseWpf>true</UseWpf>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>ApplitoolsEyesHelper</PackageId>
-    <AssemblyName>ApplitoolsEyesHelper</AssemblyName>
-    <RootNamespace>ApplitoolsEyesHelper</RootNamespace>
+    <PackageId>UiPath-ApplitoolsEyesHelper</PackageId>
+    <AssemblyName>UiPath-ApplitoolsEyesHelper</AssemblyName>
+    <RootNamespace>UiPath_ApplitoolsEyesHelper</RootNamespace>
     <Authors>anand.bagmar</Authors>
     <Description>UiPath custom activities for attaching Applitools Eyes to an existing Appium driver.</Description>
     <PackageTags>uipath;applitools;eyes;appium;mobile;visual-testing</PackageTags>
