@@ -2,6 +2,7 @@ using System;
 using Applitools;
 using Applitools.Appium;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Remote;
 
 namespace ApplitoolsEyesHelper.Runtime
@@ -39,12 +40,7 @@ namespace ApplitoolsEyesHelper.Runtime
                 throw new ArgumentException("Api key is required.", nameof(apiKey));
             }
 
-            var remoteDriver = AttachToExistingSession(new Uri(appiumUrl), sessionId);
-
-            if (remoteDriver is not RemoteWebDriver)
-            {
-                throw new ArgumentException("Unable to attach to the UiPath Appium session.", nameof(sessionId));
-            }
+            var appiumDriver = AttachToExistingSession(new Uri(appiumUrl), sessionId);
 
             var eyes = new Eyes
             {
@@ -56,13 +52,13 @@ namespace ApplitoolsEyesHelper.Runtime
                 eyes.Batch = new BatchInfo(batchName);
             }
 
-            eyes.Open(remoteDriver, appName, testName);
+            eyes.Open(appiumDriver, appName, testName);
             return new EyesSession(eyes);
         }
 
-        private static RemoteWebDriver AttachToExistingSession(Uri appiumServerUrl, string sessionId)
+        private static AppiumDriver<IWebElement> AttachToExistingSession(Uri appiumServerUrl, string sessionId)
         {
-            var driver = (RemoteWebDriver)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(RemoteWebDriver));
+            var driver = (AppiumDriver<IWebElement>)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(AppiumDriver<IWebElement>));
             var executor = new HttpCommandExecutor(appiumServerUrl, TimeSpan.FromMinutes(3));
             var desiredCapabilities = new DesiredCapabilities();
             var webdriverType = typeof(RemoteWebDriver);
