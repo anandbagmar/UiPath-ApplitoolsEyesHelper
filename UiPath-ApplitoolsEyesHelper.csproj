@@ -13,7 +13,7 @@
     <Description>UiPath custom activities for attaching Applitools Eyes to an existing Appium driver.</Description>
     <PackageTags>uipath;applitools;eyes;appium;mobile;visual-testing</PackageTags>
     <PackageOutputPath>./nupkg</PackageOutputPath>
-    <VersionPrefix>1.0.2</VersionPrefix>
+    <VersionPrefix>1.0.3</VersionPrefix>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
