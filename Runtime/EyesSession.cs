@@ -3,7 +3,6 @@ using Applitools;
 using Applitools.Appium;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
-using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Remote;
 
 namespace ApplitoolsEyesHelper.Runtime
@@ -59,7 +58,7 @@ namespace ApplitoolsEyesHelper.Runtime
 
         private static AppiumDriver<IWebElement> AttachToExistingSession(Uri appiumServerUrl, string sessionId)
         {
-            var driver = (AppiumDriver<IWebElement>)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(AttachedAppiumDriver));
+            var driver = (AppiumDriver<IWebElement>)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(AppiumDriver<IWebElement>));
             var executor = new HttpCommandExecutor(appiumServerUrl, TimeSpan.FromMinutes(3));
             var desiredCapabilities = new DesiredCapabilities();
             var webdriverType = typeof(RemoteWebDriver);
@@ -71,17 +70,6 @@ namespace ApplitoolsEyesHelper.Runtime
             SetField(webdriverType, driver, "session_id", new SessionId(sessionId));
 
             return driver;
-        }
-
-        private sealed class AttachedAppiumDriver : AppiumDriver<IWebElement>
-        {
-            // This type only exists so we can attach to an already-created UiPath Appium session
-            // and still satisfy Applitools' AppiumDriver<IWebElement> type check.
-
-            protected override IElementFactory CreateElementFactory()
-            {
-                return new AppiumElementFactory(this);
-            }
         }
 
         private static void SetField(Type type, object instance, string fieldName, object value)
