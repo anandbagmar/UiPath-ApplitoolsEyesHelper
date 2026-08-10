@@ -44,3 +44,4 @@ $RECYCLE.BIN/
 *.tmp
 node_modules
 sampleApps
+logs
