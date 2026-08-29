@@ -87,11 +87,19 @@ namespace ApplitoolsEyesHelper.Runtime
             // Keep the exact name to satisfy Eyes.GetServerUrl(...).
             private readonly Uri URL;
             private readonly HttpCommandExecutor inner;
+            private CommandInfoRepository commandInfoRepository;
 
             public DebugCommandExecutor(Uri url, TimeSpan timeout)
             {
                 URL = url ?? throw new ArgumentNullException(nameof(url));
                 inner = new HttpCommandExecutor(url, timeout);
+                commandInfoRepository = new W3CWireProtocolCommandInfoRepository();
+            }
+
+            public CommandInfoRepository CommandInfoRepository
+            {
+                get => commandInfoRepository;
+                set => commandInfoRepository = value ?? throw new ArgumentNullException(nameof(value));
             }
 
             public Response Execute(Command commandToExecute)
