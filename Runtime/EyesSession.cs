@@ -66,19 +66,43 @@ namespace ApplitoolsEyesHelper.Runtime
             // We create an uninitialized instance and graft the live session id onto it
             // without triggering a new session.
             var driver = (AndroidDriver<IWebElement>)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(AndroidDriver<IWebElement>));
-            var executor = new HttpCommandExecutor(appiumServerUrl, TimeSpan.FromMinutes(3));
+            var executor = new DebugCommandExecutor(appiumServerUrl, TimeSpan.FromMinutes(3));
             var desiredCapabilities = new DesiredCapabilities();
             var webdriverType = typeof(RemoteWebDriver);
 
-            DebugLogging.Log($"Creating RemoteWebDriver shell for session attach against '{appiumServerUrl}'.");
+            DebugLogging.Log($"Creating AndroidDriver shell for session attach against '{appiumServerUrl}'.");
             SetField(webdriverType, driver, "commandExecutor", executor);
             SetField(webdriverType, driver, "executor", executor);
             SetField(webdriverType, driver, "capabilities", desiredCapabilities);
             SetField(webdriverType, driver, "sessionId", new SessionId(sessionId));
             SetField(webdriverType, driver, "session_id", new SessionId(sessionId));
-            DebugLogging.Log("RemoteWebDriver shell initialized with existing session id.");
+            DebugLogging.Log("AndroidDriver shell initialized with existing session id.");
 
             return driver;
+        }
+
+        private sealed class DebugCommandExecutor : ICommandExecutor, IDisposable
+        {
+            // Eyes reflects for a private field named URL on the executor.
+            // Keep the exact name to satisfy Eyes.GetServerUrl(...).
+            private readonly Uri URL;
+            private readonly HttpCommandExecutor inner;
+
+            public DebugCommandExecutor(Uri url, TimeSpan timeout)
+            {
+                URL = url ?? throw new ArgumentNullException(nameof(url));
+                inner = new HttpCommandExecutor(url, timeout);
+            }
+
+            public Response Execute(Command commandToExecute)
+            {
+                return inner.Execute(commandToExecute);
+            }
+
+            public void Dispose()
+            {
+                inner.Dispose();
+            }
         }
 
         private static void SetField(Type type, object instance, string fieldName, object value)
