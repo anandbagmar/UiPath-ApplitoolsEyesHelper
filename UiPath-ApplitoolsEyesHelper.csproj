@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <UseWpf>true</UseWpf>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <GenerateTargetPlatformAttribute>false</GenerateTargetPlatformAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>UiPath-ApplitoolsEyesHelper</PackageId>
     <AssemblyName>UiPath-ApplitoolsEyesHelper</AssemblyName>
