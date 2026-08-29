@@ -2,6 +2,7 @@ using System;
 using Applitools;
 using Applitools.Appium;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Remote;
 
 namespace ApplitoolsEyesHelper.Runtime
@@ -59,11 +60,12 @@ namespace ApplitoolsEyesHelper.Runtime
             return new EyesSession(eyes);
         }
 
-        private static RemoteWebDriver AttachToExistingSession(Uri appiumServerUrl, string sessionId)
+        private static AndroidDriver<IWebElement> AttachToExistingSession(Uri appiumServerUrl, string sessionId)
         {
-            // RemoteWebDriver is concrete, so we can create an uninitialized instance and
-            // graft the live Appium session id onto it without triggering a new session.
-            var driver = (RemoteWebDriver)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(RemoteWebDriver));
+            // AndroidDriver is a concrete Appium driver, so Eyes will accept it.
+            // We create an uninitialized instance and graft the live session id onto it
+            // without triggering a new session.
+            var driver = (AndroidDriver<IWebElement>)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(AndroidDriver<IWebElement>));
             var executor = new HttpCommandExecutor(appiumServerUrl, TimeSpan.FromMinutes(3));
             var desiredCapabilities = new DesiredCapabilities();
             var webdriverType = typeof(RemoteWebDriver);
