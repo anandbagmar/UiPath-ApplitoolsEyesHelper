@@ -35,8 +35,10 @@ namespace ApplitoolsEyesHelper.Activities
             var testName = RequireText(TestName.Get(context), nameof(TestName));
             var batchName = BatchName.Get(context);
 
+            DebugLogging.Log($"Eyes Start Session resolved inputs: AppiumUrl='{appiumUrl}', SessionId='{sessionId}', ApiKey='{DebugLogging.Mask(apiKey)}', AppName='{appName}', TestName='{testName}', BatchName='{batchName}'");
             var session = EyesSession.Start(appiumUrl, sessionId, apiKey, appName, testName, batchName);
             EyesSessionRegistry.Register(sessionId, session);
+            DebugLogging.Log($"Eyes Start Session registered Eyes session for SessionId='{sessionId}'.");
         }
 
         private static string ResolveApiKey(string? apiKey)

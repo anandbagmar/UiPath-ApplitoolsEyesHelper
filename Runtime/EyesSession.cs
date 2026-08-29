@@ -39,7 +39,9 @@ namespace ApplitoolsEyesHelper.Runtime
                 throw new ArgumentException("Api key is required.", nameof(apiKey));
             }
 
+            DebugLogging.Log($"Starting Eyes session attach: AppiumUrl='{appiumUrl}', SessionId='{sessionId}', ApiKey='{DebugLogging.Mask(apiKey)}', AppName='{appName}', TestName='{testName}', BatchName='{batchName}'");
             var appiumDriver = AttachToExistingSession(new Uri(appiumUrl), sessionId);
+            DebugLogging.Log($"Attached to existing Appium session '{sessionId}' using driver type '{appiumDriver.GetType().FullName}'.");
 
             var eyes = new Eyes
             {
@@ -51,7 +53,9 @@ namespace ApplitoolsEyesHelper.Runtime
                 eyes.Batch = new BatchInfo(batchName);
             }
 
+            DebugLogging.Log("Calling Eyes.Open(...).");
             eyes.Open(appiumDriver, appName, testName);
+            DebugLogging.Log("Eyes.Open(...) completed successfully.");
             return new EyesSession(eyes);
         }
 
@@ -64,11 +68,13 @@ namespace ApplitoolsEyesHelper.Runtime
             var desiredCapabilities = new DesiredCapabilities();
             var webdriverType = typeof(RemoteWebDriver);
 
+            DebugLogging.Log($"Creating RemoteWebDriver shell for session attach against '{appiumServerUrl}'.");
             SetField(webdriverType, driver, "commandExecutor", executor);
             SetField(webdriverType, driver, "executor", executor);
             SetField(webdriverType, driver, "capabilities", desiredCapabilities);
             SetField(webdriverType, driver, "sessionId", new SessionId(sessionId));
             SetField(webdriverType, driver, "session_id", new SessionId(sessionId));
+            DebugLogging.Log("RemoteWebDriver shell initialized with existing session id.");
 
             return driver;
         }
