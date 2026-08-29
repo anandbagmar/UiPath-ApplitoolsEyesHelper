@@ -68,6 +68,9 @@ namespace ApplitoolsEyesHelper.Runtime
             var driver = (AndroidDriver<IWebElement>)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(AndroidDriver<IWebElement>));
             var executor = new DebugCommandExecutor(appiumServerUrl, TimeSpan.FromMinutes(3));
             var desiredCapabilities = new DesiredCapabilities();
+            desiredCapabilities.SetCapability("platformName", "Android");
+            desiredCapabilities.SetCapability("automationName", "UiAutomator2");
+            desiredCapabilities.SetCapability("deviceName", "Android");
             var webdriverType = typeof(RemoteWebDriver);
 
             DebugLogging.Log($"Creating AndroidDriver shell for session attach against '{appiumServerUrl}'.");
