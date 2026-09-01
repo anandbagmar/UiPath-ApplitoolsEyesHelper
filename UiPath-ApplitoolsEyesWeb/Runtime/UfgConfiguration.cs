@@ -113,7 +113,7 @@ namespace ApplitoolsEyesWeb.Runtime
             if (ChromeEmulationInfo != null)
             {
                 configuration.AddDeviceEmulation(
-                    RequireDeviceName(ChromeEmulationInfo.DeviceName, "chromeEmulationInfo.deviceName"),
+                    ParseDeviceName(RequireDeviceName(ChromeEmulationInfo.DeviceName, "chromeEmulationInfo.deviceName")),
                     ParseOrientation(ChromeEmulationInfo.ScreenOrientation));
                 return;
             }
@@ -121,19 +121,19 @@ namespace ApplitoolsEyesWeb.Runtime
             if (IosDeviceInfo != null)
             {
                 configuration.AddDeviceEmulation(
-                    RequireDeviceName(IosDeviceInfo.DeviceName, "iosDeviceInfo.deviceName"),
+                    ParseDeviceName(RequireDeviceName(IosDeviceInfo.DeviceName, "iosDeviceInfo.deviceName")),
                     ScreenOrientation.Portrait);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(Name) || !Width.HasValue || !Height.HasValue)
             {
-                throw new ArgumentException("Each desktop browser entry requires name, width, and height.", nameof(BrowsersInfo));
+                throw new ArgumentException("Each desktop browser entry requires name, width, and height.", nameof(UfgConfiguration.BrowsersInfo));
             }
 
             if (Width.Value < 1 || Height.Value < 1)
             {
-                throw new ArgumentException("Browser width and height must be greater than zero.", nameof(BrowsersInfo));
+                throw new ArgumentException("Browser width and height must be greater than zero.", nameof(UfgConfiguration.BrowsersInfo));
             }
 
             configuration.AddBrowser(Width.Value, Height.Value, ParseBrowserType(Name));
@@ -143,7 +143,7 @@ namespace ApplitoolsEyesWeb.Runtime
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException($"The {fieldName} value is required for a device entry.", nameof(BrowsersInfo));
+                throw new ArgumentException($"The {fieldName} value is required for a device entry.", nameof(UfgConfiguration.BrowsersInfo));
             }
 
             return value;
@@ -165,7 +165,22 @@ namespace ApplitoolsEyesWeb.Runtime
                 "safari" => BrowserType.SAFARI,
                 "edge" => BrowserType.EDGE_CHROMIUM,
                 "edgechromium" => BrowserType.EDGE_CHROMIUM,
-                _ => throw new ArgumentException($"Unsupported browser '{value}'. Supported values are chrome, firefox, safari, edge, and edgechromium.", nameof(BrowsersInfo))
+                _ => throw new ArgumentException($"Unsupported browser '{value}'. Supported values are chrome, firefox, safari, edge, and edgechromium.", nameof(UfgConfiguration.BrowsersInfo))
+            };
+        }
+
+        private static DeviceName ParseDeviceName(string value)
+        {
+            return value.Trim().ToLowerInvariant() switch
+            {
+                "galaxy s22 ultra" => DeviceName.Galaxy_S22_Ultra,
+                "galaxy note 9" => DeviceName.Galaxy_Note_9,
+                "pixel 5" => DeviceName.Pixel_5,
+                "iphone 15 pro max" => DeviceName.iPhone_15_Pro_Max,
+                "iphone 14 pro max" => DeviceName.iPhone_14_Pro_Max,
+                "iphone 13" => DeviceName.iPhone_13,
+                "ipad pro (12.9-inch) (3rd generation)" => DeviceName.iPad_Pro_12_9_inch_3,
+                _ => throw new ArgumentException($"Unsupported device '{value}'. Add a supported Applitools DeviceName mapping before using it in UfgConfigJson.", nameof(UfgConfiguration.BrowsersInfo))
             };
         }
     }

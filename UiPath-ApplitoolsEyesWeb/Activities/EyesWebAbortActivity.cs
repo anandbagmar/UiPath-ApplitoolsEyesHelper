@@ -16,7 +16,7 @@ namespace ApplitoolsEyesWeb.Activities
         protected override void Execute(CodeActivityContext context)
         {
             var sessionId = RequireText(SessionId.Get(context), nameof(SessionId));
-            if (EyesWebSessionRegistry.TryRemove(sessionId, out var session))
+            if (EyesWebSessionRegistry.TryRemove(sessionId, out var session) && session != null)
             {
                 session.Abort();
             }

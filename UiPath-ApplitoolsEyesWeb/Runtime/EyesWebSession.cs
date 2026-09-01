@@ -51,7 +51,8 @@ namespace ApplitoolsEyesWeb.Runtime
 
             try
             {
-                eyes.Open(driver, configuration);
+                eyes.SetConfiguration(configuration);
+                eyes.Open(driver);
             }
             catch
             {
