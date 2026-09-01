@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Applitools;
@@ -120,8 +122,9 @@ namespace ApplitoolsEyesWeb.Runtime
 
             if (IosDeviceInfo != null)
             {
-                configuration.AddDeviceEmulation(
-                    ParseDeviceName(RequireDeviceName(IosDeviceInfo.DeviceName, "iosDeviceInfo.deviceName")),
+                AddIosDevice(
+                    configuration,
+                    RequireDeviceName(IosDeviceInfo.DeviceName, "iosDeviceInfo.deviceName"),
                     ScreenOrientation.Portrait);
                 return;
             }
@@ -173,12 +176,89 @@ namespace ApplitoolsEyesWeb.Runtime
         {
             try
             {
-                return DeviceName.ToDeviceName(CanonicalizeDeviceName(value));
+                return value.Trim().ToLowerInvariant() switch
+                {
+                    "galaxy s22 ultra" => DeviceName.Galaxy_S22_Ultra,
+                    "galaxy note 9" => DeviceName.Galaxy_Note_9,
+                    "pixel 5" => DeviceName.Pixel_5,
+                    _ => throw new ArgumentException($"Unsupported Chrome emulation device '{value}'.", nameof(value))
+                };
             }
             catch (Exception exception) when (exception is ArgumentException || exception is InvalidOperationException)
             {
                 throw new ArgumentException($"Unsupported device '{value}'. Use a device name supported by the Applitools Visual Grid.", nameof(UfgConfiguration.BrowsersInfo), exception);
             }
+        }
+
+        private static void AddIosDevice(Configuration configuration, string deviceName, ScreenOrientation orientation)
+        {
+            var assembly = typeof(Configuration).Assembly;
+            var iosNameType = FindType(assembly, "IosDeviceName");
+            var iosInfoType = FindType(assembly, "IosDeviceInfo");
+            var iosName = FindNamedValue(iosNameType, deviceName);
+            var info = CreateIosDeviceInfo(iosInfoType, iosName, orientation);
+            var addBrowser = typeof(Configuration).GetMethods(BindingFlags.Instance | BindingFlags.Public)
+                .FirstOrDefault(method => method.Name == "AddBrowser"
+                    && method.GetParameters().Length == 1
+                    && method.GetParameters()[0].ParameterType.IsInstanceOfType(info));
+
+            if (addBrowser == null)
+            {
+                throw new InvalidOperationException("The installed Applitools Selenium SDK does not expose an iOS UFG browser configuration API.");
+            }
+
+            addBrowser.Invoke(configuration, new[] { info });
+        }
+
+        private static Type FindType(Assembly assembly, string typeName)
+        {
+            var type = Array.Find(assembly.GetTypes(), candidate => candidate.Name == typeName);
+            return type ?? throw new InvalidOperationException($"The installed Applitools Selenium SDK does not contain {typeName}.");
+        }
+
+        private static object FindNamedValue(Type type, string value)
+        {
+            var normalized = NormalizeName(value);
+            var field = Array.Find(type.GetFields(BindingFlags.Public | BindingFlags.Static), candidate => NormalizeName(candidate.Name) == normalized);
+            if (field != null)
+            {
+                return field.GetValue(null)!;
+            }
+
+            var property = Array.Find(type.GetProperties(BindingFlags.Public | BindingFlags.Static), candidate => NormalizeName(candidate.Name) == normalized);
+            if (property != null)
+            {
+                return property.GetValue(null)!;
+            }
+
+            throw new ArgumentException($"Unsupported iOS device '{value}'. Use a device name supported by the Applitools Visual Grid.", nameof(value));
+        }
+
+        private static object CreateIosDeviceInfo(Type type, object deviceName, ScreenOrientation orientation)
+        {
+            foreach (var constructor in type.GetConstructors(BindingFlags.Public | BindingFlags.Instance))
+            {
+                var parameters = constructor.GetParameters();
+                if (parameters.Length == 2
+                    && parameters[0].ParameterType.IsInstanceOfType(deviceName)
+                    && parameters[1].ParameterType == typeof(ScreenOrientation))
+                {
+                    return constructor.Invoke(new object[] { deviceName, orientation });
+                }
+
+                if (parameters.Length == 1 && parameters[0].ParameterType.IsInstanceOfType(deviceName))
+                {
+                    return constructor.Invoke(new[] { deviceName });
+                }
+            }
+
+            throw new InvalidOperationException("The installed Applitools Selenium SDK does not expose a compatible IosDeviceInfo constructor.");
+        }
+
+        private static string NormalizeName(string value)
+        {
+            var characters = value.Trim().ToLowerInvariant().ToCharArray();
+            return new string(Array.FindAll(characters, character => char.IsLetterOrDigit(character)));
         }
 
         private static string CanonicalizeDeviceName(string value)
