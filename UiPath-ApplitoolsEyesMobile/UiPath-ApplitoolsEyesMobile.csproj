@@ -9,7 +9,7 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <GenerateTargetPlatformAttribute>false</GenerateTargetPlatformAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>UiPath-ApplitoolsEyesHelper</PackageId>
+    <PackageId>UiPath.ApplitoolsEyes.Mobile</PackageId>
     <AssemblyName>UiPath-ApplitoolsEyesHelper</AssemblyName>
     <RootNamespace>UiPath_ApplitoolsEyesHelper</RootNamespace>
     <Authors>anand.bagmar</Authors>

@@ -15,6 +15,7 @@ dotnet build .\UiPath-ApplitoolsEyesMobile\UiPath-ApplitoolsEyesMobile.csproj -c
 ```
 
 The mobile `.nupkg` is written to `.\UiPath-ApplitoolsEyesMobile\nupkg`.
+The expected mobile package name is `UiPath.ApplitoolsEyes.Mobile.1.0.0.nupkg`.
 
 To build the web package, run:
 
@@ -23,6 +24,7 @@ dotnet build .\UiPath-ApplitoolsEyesWeb\UiPath-ApplitoolsEyesWeb.csproj -c Relea
 ```
 
 Its package is written to `.\UiPath-ApplitoolsEyesWeb\nupkg`.
+The expected web package name is `UiPath.ApplitoolsEyes.Web.1.0.0.nupkg`.
 
 The web project uses the `Eyes.Selenium` package. Keep its version aligned with a version published for `Eyes.Selenium`; it is versioned separately from the mobile package's `Eyes.Appium` dependency.
 
