@@ -173,12 +173,27 @@ namespace ApplitoolsEyesWeb.Runtime
         {
             try
             {
-                return DeviceName.ToDeviceName(value);
+                return DeviceName.ToDeviceName(CanonicalizeDeviceName(value));
             }
             catch (Exception exception) when (exception is ArgumentException || exception is InvalidOperationException)
             {
                 throw new ArgumentException($"Unsupported device '{value}'. Use a device name supported by the Applitools Visual Grid.", nameof(UfgConfiguration.BrowsersInfo), exception);
             }
+        }
+
+        private static string CanonicalizeDeviceName(string value)
+        {
+            return value.Trim().ToLowerInvariant() switch
+            {
+                "galaxy s22 ultra" => "Galaxy S22 Ultra",
+                "galaxy note 9" => "Galaxy Note 9",
+                "pixel 5" => "Pixel 5",
+                "iphone 15 pro max" => "iPhone 15 Pro Max",
+                "iphone 14 pro max" => "iPhone 14 Pro Max",
+                "iphone 13" => "iPhone 13",
+                "ipad pro (12.9-inch) (3rd generation)" => "iPad Pro (12.9-inch) (3rd generation)",
+                _ => value.Trim()
+            };
         }
     }
 
