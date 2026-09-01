@@ -7,20 +7,30 @@ Use this to build the custom activity package and install it in UiPath Studio.
 On the Windows VM:
 
 1. Open `C:\UiPath\UiPath-ApplitoolsEyesHelper`.
-2. Bump `VersionPrefix` in `UiPath-ApplitoolsEyesHelper.csproj` if you want UiPath Studio to pick up a new package version.
+2. Bump `VersionPrefix` in the relevant project file if you want UiPath Studio to pick up a new package version.
 3. Run:
 
 ```powershell
-dotnet build .\UiPath-ApplitoolsEyesHelper.csproj -c Release
+dotnet build .\UiPath-ApplitoolsEyesMobile\UiPath-ApplitoolsEyesMobile.csproj -c Release
 ```
 
-The `.nupkg` is written to `.\nupkg`.
+The mobile `.nupkg` is written to `.\UiPath-ApplitoolsEyesMobile\nupkg`.
+
+To build the web package, run:
+
+```powershell
+dotnet build .\UiPath-ApplitoolsEyesWeb\UiPath-ApplitoolsEyesWeb.csproj -c Release
+```
+
+Its package is written to `.\UiPath-ApplitoolsEyesWeb\nupkg`.
 
 ## Install in UiPath Studio
 
 1. Open your UiPath project.
-2. Add `C:\UiPath\UiPath-ApplitoolsEyesHelper\nupkg` as a local feed.
-3. Install the newest `UiPath-ApplitoolsEyesHelper` package.
+2. Add the appropriate package output folder as a local feed:
+   - Mobile: `C:\UiPath\UiPath-ApplitoolsEyesHelper\UiPath-ApplitoolsEyesMobile\nupkg`
+   - Web: `C:\UiPath\UiPath-ApplitoolsEyesHelper\UiPath-ApplitoolsEyesWeb\nupkg`
+3. Install the desired package.
 
 ## Use in workflow
 
@@ -39,3 +49,9 @@ The `.nupkg` is written to `.\nupkg`.
 - `TestName`: Applitools test name
 - `ApiKey`: optional; falls back to `APPLITOOLS_API_KEY`
 - `BatchName`: optional
+
+## Web package
+
+Install `UiPath.ApplitoolsEyes.Web` separately from the mobile package. The web package uses Selenium and exposes the same activity names as the mobile package: `Eyes Start Session`, `Eyes Check`, `Eyes Close Session`, and `Eyes Abort Session`.
+
+`Eyes Start Session` requires `WebDriverUrl`, `SessionId`, `AppName`, `TestName`, and `UfgConfigJson`. `UfgConfigJson` contains the UFG `browsersInfo` list and may also contain `concurrency` and `viewportSize`; see `UiPath-ApplitoolsEyesWeb\README.md` for an example.

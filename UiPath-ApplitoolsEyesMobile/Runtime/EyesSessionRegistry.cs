@@ -26,7 +26,7 @@ namespace ApplitoolsEyesHelper.Runtime
         {
             if (!Sessions.TryGetValue(sessionId, out var session))
             {
-                throw new InvalidOperationException("No Applitools Eyes session exists for the provided session id. Call Eyes Start Session first.");
+                throw new InvalidOperationException("No Applitools Eyes mobile session exists for the provided session id. Call Eyes Start Session first.");
             }
 
             return session;

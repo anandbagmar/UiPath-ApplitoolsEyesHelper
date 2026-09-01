@@ -1,4 +1,4 @@
-# UiPath-ApplitoolsEyesHelper
+# UiPath Applitools Eyes Mobile Activities
 
 Custom UiPath activities for attaching Applitools Eyes to an Appium session that UiPath already owns.
 
@@ -11,9 +11,9 @@ Custom UiPath activities for attaching Applitools Eyes to an Appium session that
 
 ## Where to look
 
-- [`docs/BUILD_AND_SETUP.md`](./docs/BUILD_AND_SETUP.md) for build and install steps
-- [`docs/SAMPLE_UIPATH_WORKFLOW.md`](./docs/SAMPLE_UIPATH_WORKFLOW.md) for the UiPath activity order
-- [`docs/DEBUG_WINDOWS_VM.md`](./docs/DEBUG_WINDOWS_VM.md) for the Windows debug harness
+- [`BUILD_AND_SETUP.md`](../docs/BUILD_AND_SETUP.md) for build and install steps
+- [`SAMPLE_UIPATH_WORKFLOW.md`](../docs/SAMPLE_UIPATH_WORKFLOW.md) for the UiPath activity order
+- [`DEBUG_WINDOWS_VM.md`](../docs/DEBUG_WINDOWS_VM.md) for the Windows debug harness
 
 ## Inputs
 

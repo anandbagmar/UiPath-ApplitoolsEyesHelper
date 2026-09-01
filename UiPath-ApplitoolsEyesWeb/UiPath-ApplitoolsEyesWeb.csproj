@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UseWpf>true</UseWpf>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <GenerateTargetPlatformAttribute>false</GenerateTargetPlatformAttribute>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>UiPath-ApplitoolsEyes.Web</PackageId>
+    <AssemblyName>UiPath-ApplitoolsEyesWeb</AssemblyName>
+    <RootNamespace>ApplitoolsEyesWeb</RootNamespace>
+    <Authors>anand.bagmar</Authors>
+    <Description>UiPath custom activities for attaching Applitools Eyes to an existing Selenium browser session.</Description>
+    <PackageTags>uipath;applitools;eyes;selenium;web;visual-testing;ultrafast-grid</PackageTags>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="UiPath.Workflow.Runtime" Version="6.0.0-20220401-03" PrivateAssets="all" />
+    <PackageReference Include="UiPath.Workflow" Version="6.0.0-20220401-03" PrivateAssets="all" />
+    <PackageReference Include="System.Activities.Core.Presentation" Version="6.0.0-20220318.2" PrivateAssets="all" />
+    <PackageReference Include="System.Activities.Metadata" Version="6.0.0-20220318.2" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Eyes.Selenium" Version="5.89.26" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\ActivitiesMetadata.json" Pack="true" PackagePath="content\Resources\ActivitiesMetadata.json" />
+  </ItemGroup>
+</Project>

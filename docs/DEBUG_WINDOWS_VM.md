@@ -11,7 +11,7 @@ Use the debug harness when you want to test `Eyes Start Session` against a live 
 ## Build
 
 ```powershell
-dotnet build .\DebugHarness\UiPath-ApplitoolsEyesHelper.DebugHarness.csproj
+dotnet build .\UiPath-ApplitoolsEyesMobile\DebugHarness\UiPath-ApplitoolsEyesMobile.DebugHarness.csproj
 ```
 
 ## Run

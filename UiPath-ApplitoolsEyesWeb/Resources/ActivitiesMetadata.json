@@ -1,0 +1,32 @@
+{
+  "activities": [
+    {
+      "fullName": "ApplitoolsEyesWeb.Activities.EyesWebStartSessionActivity",
+      "shortName": "EyesWebStartSessionActivity",
+      "displayName": "Eyes Start Session",
+      "description": "Attach Applitools Eyes to an existing UiPath Selenium session and start a web visual session.",
+      "category": "Applitools Eyes"
+    },
+    {
+      "fullName": "ApplitoolsEyesWeb.Activities.EyesWebCheckActivity",
+      "shortName": "EyesWebCheckActivity",
+      "displayName": "Eyes Check",
+      "description": "Run a visual checkpoint against an active Applitools Eyes web session.",
+      "category": "Applitools Eyes"
+    },
+    {
+      "fullName": "ApplitoolsEyesWeb.Activities.EyesWebCloseActivity",
+      "shortName": "EyesWebCloseActivity",
+      "displayName": "Eyes Close Session",
+      "description": "Close the active Applitools Eyes web session and finalize the visual test.",
+      "category": "Applitools Eyes"
+    },
+    {
+      "fullName": "ApplitoolsEyesWeb.Activities.EyesWebAbortActivity",
+      "shortName": "EyesWebAbortActivity",
+      "displayName": "Eyes Abort Session",
+      "description": "Abort an Applitools Eyes web session if the workflow fails or exits early.",
+      "category": "Applitools Eyes"
+    }
+  ]
+}
