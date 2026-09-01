@@ -171,17 +171,14 @@ namespace ApplitoolsEyesWeb.Runtime
 
         private static DeviceName ParseDeviceName(string value)
         {
-            return value.Trim().ToLowerInvariant() switch
+            try
             {
-                "galaxy s22 ultra" => DeviceName.Galaxy_S22_Ultra,
-                "galaxy note 9" => DeviceName.Galaxy_Note_9,
-                "pixel 5" => DeviceName.Pixel_5,
-                "iphone 15 pro max" => DeviceName.iPhone_15_Pro_Max,
-                "iphone 14 pro max" => DeviceName.iPhone_14_Pro_Max,
-                "iphone 13" => DeviceName.iPhone_13,
-                "ipad pro (12.9-inch) (3rd generation)" => DeviceName.iPad_Pro_12_9_inch_3,
-                _ => throw new ArgumentException($"Unsupported device '{value}'. Add a supported Applitools DeviceName mapping before using it in UfgConfigJson.", nameof(UfgConfiguration.BrowsersInfo))
-            };
+                return DeviceName.ToDeviceName(value);
+            }
+            catch (Exception exception) when (exception is ArgumentException || exception is InvalidOperationException)
+            {
+                throw new ArgumentException($"Unsupported device '{value}'. Use a device name supported by the Applitools Visual Grid.", nameof(UfgConfiguration.BrowsersInfo), exception);
+            }
         }
     }
 
