@@ -24,6 +24,8 @@ dotnet build .\UiPath-ApplitoolsEyesWeb\UiPath-ApplitoolsEyesWeb.csproj -c Relea
 
 Its package is written to `.\UiPath-ApplitoolsEyesWeb\nupkg`.
 
+The web project uses the `Eyes.Selenium` package. Keep its version aligned with a version published for `Eyes.Selenium`; it is versioned separately from the mobile package's `Eyes.Appium` dependency.
+
 ## Install in UiPath Studio
 
 1. Open your UiPath project.

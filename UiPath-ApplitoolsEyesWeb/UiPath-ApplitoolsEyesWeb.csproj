@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Eyes.Selenium" Version="5.89.26" />
+    <PackageReference Include="Eyes.Selenium" Version="3.89.26" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
   </ItemGroup>
