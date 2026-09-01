@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Applitools;
 using Applitools.Selenium;
+using Applitools.VisualGrid;
 using Applitools.Utils.Geometry;
 
 namespace ApplitoolsEyesWeb.Runtime
